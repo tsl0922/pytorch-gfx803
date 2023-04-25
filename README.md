@@ -6,6 +6,8 @@ build pytorch 1.x with ROCm support for stable-diffusion-webui
 Ubuntu 22.04.2 LTS
 Radeon RX 580 8GB
 RoCm 5.4.3
+Gcc 11.2.0
+Linux 5.19
 
 Python 3.10.6
 - pytorch 1.13.1
