@@ -33,7 +33,13 @@ rocminfo
 clinfo
 ```
 
-## Build pytorch
+## Build
+
+You may need to install addional ependencies, and the build will take a long time.
+
+**TL;DR:** use the prebuilt [binaries](https://github.com/tsl0922/pytorch-gfx803/releases) if you want to make your life easier.
+
+### Build pytorch
 
 ```bash
 git clone https://github.com/pytorch/pytorch.git -b v1.13.1
@@ -46,7 +52,7 @@ USE_ROCM=1 USE_NINJA=1 python3 setup.py bdist_wheel
 pip3 install dist/torch-1.13.1-cp310-cp310-linux_x86_64.whl
 ```
 
-## Build torchvision
+### Build torchvision
 
 ```bash
 git clone https://github.com/pytorch/vision.git -b v0.14.1
