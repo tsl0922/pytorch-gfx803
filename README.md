@@ -44,8 +44,8 @@ sudo echo HSA_OVERRIDE_GFX_VERSION=8.0.3 >> /etc/environment
 
 curl -LO https://repo.radeon.com/amdgpu-install/5.5/rhel/9.1/amdgpu-install-5.5.50500-1.el9.noarch.rpm
 sudo dnf install ./amdgpu-install-5.5.50500-1.el9.noarch.rpm
-sed -i 's/\$amdgpudistro/9.1/gi' /etc/yum.repos.d/amdgpu.repo # on fedora, renders an error otherwise
-sed -i 's/\$amdgpudistro/9.1/gi' /etc/yum.repos.d/amdgpu-proprietary.repo # on fedora, renders an error otherwise
+sudo sed -i 's/\$amdgpudistro/9.1/gi' /etc/yum.repos.d/amdgpu.repo # on fedora, renders an error otherwise
+sudo sed -i 's/\$amdgpudistro/9.1/gi' /etc/yum.repos.d/amdgpu-proprietary.repo # on fedora, renders an error otherwise
 sudo amdgpu-install -y --usecase=rocm,hiplibsdk,mlsdk
 
 sudo usermod -aG video $LOGNAME
