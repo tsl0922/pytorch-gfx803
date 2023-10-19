@@ -58,7 +58,7 @@ clinfo
 
 ## Build
 
-You may need to install addional ependencies, and the build will take a long time.
+You may need to install additional dependencies, and the build will take a long time.
 
 **TL;DR:** use the prebuilt [binaries](https://github.com/tsl0922/pytorch-gfx803/releases) if you want to make your life easier.
 
@@ -71,7 +71,8 @@ You may need to install addional ependencies, and the build will take a long tim
 > To fix that, you should add the path to OpenMPI libraries to LD_LIBRARY_PATH:
 > 
 > 1. Open the config file: `sudo nano /etc/ld.so.conf.d/openmpi-x86_64.conf`.
-> 2. Add `/usr/lib64/openmpi/lib` if it doesn't exist.
+> 2. Paste `/usr/lib64/openmpi/lib`, then save and quit.
+> 3. Run `sudo ldconfig` to refresh dynamic library cache.
 
 ### Build pytorch
 
