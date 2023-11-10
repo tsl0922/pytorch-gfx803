@@ -16,6 +16,8 @@ Python 3.10.6
 
 ## Install ROCm
 
+Ubuntu and other Debian-based distros:
+
 ```bash
 sudo echo ROC_ENABLE_PRE_VEGA=1 >> /etc/environment
 sudo echo HSA_OVERRIDE_GFX_VERSION=8.0.3 >> /etc/environment
@@ -33,11 +35,44 @@ rocminfo
 clinfo
 ```
 
+Fedora & possibly other RH-based distros:
+
+```bash
+sudo echo ROC_ENABLE_PRE_VEGA=1 >> /etc/environment
+sudo echo HSA_OVERRIDE_GFX_VERSION=8.0.3 >> /etc/environment
+# reboot
+
+curl -LO https://repo.radeon.com/amdgpu-install/5.5/rhel/9.1/amdgpu-install-5.5.50500-1.el9.noarch.rpm
+sudo dnf install ./amdgpu-install-5.5.50500-1.el9.noarch.rpm
+sudo sed -i 's/\$amdgpudistro/9.1/gi' /etc/yum.repos.d/amdgpu.repo # on fedora, renders an error otherwise
+sudo sed -i 's/\$amdgpudistro/9.1/gi' /etc/yum.repos.d/amdgpu-proprietary.repo # on fedora, renders an error otherwise
+sudo amdgpu-install -y --usecase=rocm,hiplibsdk,mlsdk
+
+sudo usermod -aG video $LOGNAME
+sudo usermod -aG render $LOGNAME
+
+# verify
+rocminfo
+clinfo
+```
+
 ## Build
 
-You may need to install addional ependencies, and the build will take a long time.
+You may need to install additional dependencies, and the build will take a long time.
 
 **TL;DR:** use the prebuilt [binaries](https://github.com/tsl0922/pytorch-gfx803/releases) if you want to make your life easier.
+
+> Quick note for Fedora users trying to use prebuilt binaries:
+>
+> Sometimes this error shows up even if `openmpi` and `openmpi-devel` packages were already installed:
+> 
+> `OSError: libmpi_cxx.so.40: cannot open shared object file: No such file or directory while import torch`
+> 
+> To fix that, you should add the path to OpenMPI libraries to LD_LIBRARY_PATH:
+> 
+> 1. Open the config file: `sudo nano /etc/ld.so.conf.d/openmpi-x86_64.conf`.
+> 2. Paste `/usr/lib64/openmpi/lib`, then save and quit.
+> 3. Run `sudo ldconfig` to refresh dynamic library cache.
 
 ### Build pytorch
 
