@@ -14,6 +14,12 @@ Python 3.10.6
 - torchvision 0.14.1
 ```
 
+## Install dependencies
+
+```bash
+apt install libopenmpi3 libstdc++-12-dev
+```
+
 ## Install ROCm
 
 Ubuntu and other Debian-based distros:
@@ -99,9 +105,8 @@ pip3 install dist/torchvision-0.14.1-cp310-cp310-linux_x86_64.whl
 
 ## Test
 
-```python
-import torch
-torch.cuda.is_available()
+```bash
+python3 test_torch.py
 ```
 
 ## Reference
